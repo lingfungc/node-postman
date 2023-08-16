@@ -50,12 +50,20 @@
           <button data-add-request-headers-btn class="mt-2 btn btn-outline-success" type="button">Add 2</button>
         </div>
         <div class="tab-pane fade" id="json" role="tabpanel" aria-labelledby="json-tab">
-          <div data-json></div>
-          <button data-add-json-btn class="mt-2 btn btn-outline-success" type="button">Add 3</button>
+          <div data-json-request-body class="overflow-auto" style="max-height: 200px;"></div>
         </div>
       </div>
     </form>
   </div>
+
+  <template data-key-value-template>
+    <div class="input-group my-2" data-key-value-pair>
+      <input type="text" data-key class="form-control" placeholder="Key"></input>
+      <input type="text" data-value class="form-control" placeholder="Value"></input>
+      <button type="button" data-remove-btn class="btn btn-outline-danger">Remove</button>
+    </div>
+  </template>
+
 </body>
 
 </html>
