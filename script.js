@@ -22,4 +22,9 @@ queryParamsAddBtn.addEventListener("click", () => {
 const requestHeadersContainer = document.querySelector(
   "[data-request-headers]"
 );
-requestHeadersContainer.append(createKeyValuePair());
+const requestHeadersAddBtn = document.querySelector(
+  "[data-add-request-headers-btn]"
+);
+requestHeadersAddBtn.addEventListener("click", () => {
+  requestHeadersContainer.append(createKeyValuePair());
+});
