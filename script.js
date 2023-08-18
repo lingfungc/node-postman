@@ -8,6 +8,11 @@ const form = document.querySelector("[data-form]");
 // Get the Key Value Template
 const keyValueTemplate = document.querySelector("[data-key-value-template]");
 
+// Get Response Headers Section
+const responseHeadersContainer = document.querySelector(
+  "[data-response-headers]"
+);
+
 // Function to Create Key Value Pair HTML Element
 const createKeyValuePair = () => {
   // * The .cloneNode(true) helps to clone all the text content from keyValueTemplate into variable "element"
@@ -37,6 +42,23 @@ const keyValuePairToObjects = (container) => {
       // This {} accumulator is a must in a .reduce function
     }, {});
   }
+};
+
+// Function to Update Response Headers Content
+const updateResponseHeaders = (resHeaders) => {
+  responseHeadersContainer.innerHTML = "";
+
+  // This Object.entries() returns us an array containing all key-value pairs in resHeaders
+  // Then inside the .forEach iteration, we can access the key-value pair as an array [key, value]
+  // For example: const person = { isHuman: false, name: "Kyle" }
+  //              Object.entries(person) => [ [ 'isHuman', false ], [ 'name', 'Kyle' ] ]
+  Object.entries(resHeaders).forEach(([key, value]) => {
+    const keyElement = document.createElement("div");
+    keyElement.textContent = key;
+
+    console.log(keyElement);
+    responseHeadersContainer.append(keyElement);
+  });
 };
 
 // Query Params
@@ -74,8 +96,8 @@ form.addEventListener("submit", (e) => {
       .querySelector("[data-response-section]")
       .classList.remove("d-none");
 
-    updateResponseDetails(response);
-    updateResponseEditor(response.data);
+    // updateResponseDetails(response);
+    // updateResponseEditor(response.data);
     updateResponseHeaders(response.headers);
   });
 });
