@@ -54,10 +54,14 @@ const updateResponseHeaders = (resHeaders) => {
   //              Object.entries(person) => [ [ 'isHuman', false ], [ 'name', 'Kyle' ] ]
   Object.entries(resHeaders).forEach(([key, value]) => {
     const keyElement = document.createElement("div");
-    keyElement.textContent = key;
-
-    console.log(keyElement);
+    keyElement.textContent = key + ":";
+    // console.log(keyElement);
     responseHeadersContainer.append(keyElement);
+
+    const valueElement = document.createElement("div");
+    valueElement.textContent = value;
+    // console.log(valueElement);
+    responseHeadersContainer.append(valueElement);
   });
 };
 
