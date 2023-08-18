@@ -23,7 +23,7 @@
         <button type="submit" class="btn btn-primary">Send</button>
       </div>
 
-      <!-- Tab List Items as Headers -->
+      <!-- Tab List Items as Headers in Request -->
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="query-params-tab" data-bs-toggle="tab" data-bs-target="#query-params"
@@ -39,7 +39,7 @@
         </li>
       </ul>
 
-      <!-- Tab Content for Each Section -->
+      <!-- Tab Content for Each Section in Request -->
       <div class="tab-content p-3 border-top-0 border">
         <div class="tab-pane fade show active" id="query-params" role="tabpanel" aria-labelledby="query-params-tab">
           <div data-query-params></div>
@@ -54,6 +54,44 @@
         </div>
       </div>
     </form>
+
+    <!-- Response Section -->
+    <div class="mt-5" data-response-section>
+      <h3>Response</h3>
+      <div class="d-flex my-2">
+        <div class="me-3">
+          Status: <span data-status>xxx</span>
+        </div>
+        <div class="me-3">
+          Time: <span data-status>xxx</span> ms
+        </div>
+        <div class="me-3">
+          Size: <span data-status>xxx</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab List Items as Headers in Response -->
+    <ul class="nav nav-tabs mt-3" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="response-body-tab" data-bs-toggle="tab" data-bs-target="#response-body"
+          type="button" role="tab" aria-controls="response-body" aria-selected="true">Body</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="response-headers-tab" data-bs-toggle="tab" data-bs-target="#response-headers"
+          type="button" role="tab" aria-controls="response-headers" aria-selected="false">Headers</button>
+      </li>
+    </ul>
+
+    <!-- Tab Content for Each Section in Response -->
+    <div class="tab-content p-3 border-top-0 border">
+      <div class="tab-pane fade show active" id="response-body" role="tabpanel" aria-labelledby="response-body-tab">
+        <div data-response-body></div>
+      </div>
+      <div class="tab-pane fade" id="response-headers" role="tabpanel" aria-labelledby="response-headers-tab">
+        <div data-response-headers></div>
+      </div>
+    </div>
   </div>
 
   <template data-key-value-template>

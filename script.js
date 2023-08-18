@@ -26,13 +26,8 @@ const keyValuePairToObjects = (container) => {
 
   if ([...pairs].length > 0) {
     return [...pairs].reduce((data, pair) => {
-      console.log(data);
-      console.log(pair);
-
       const key = pair.querySelector("[data-key]").value;
-      console.log(key);
       const value = pair.querySelector("[data-value]").value;
-      console.log(value);
 
       if (key === "") return data;
 
