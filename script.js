@@ -69,5 +69,13 @@ form.addEventListener("submit", (e) => {
     headers: keyValuePairToObjects(requestHeadersContainer),
   }).then((response) => {
     console.log(response);
+
+    document
+      .querySelector("[data-response-section]")
+      .classList.remove("d-none");
+
+    updateResponseDetails(response);
+    updateResponseEditor(response.data);
+    updateResponseHeaders(response.headers);
   });
 });
