@@ -26,12 +26,21 @@ const keyValuePairToObjects = (container) => {
 
   if ([...pairs].length > 0) {
     return [...pairs].reduce((data, pair) => {
-      const key = pair.querySelector("[data-key]").value;
-      const value = pair.querySelector("[data-value]").value;
+      console.log(data);
+      console.log(pair);
 
-      if (ley === "") return data;
+      const key = pair.querySelector("[data-key]").value;
+      console.log(key);
+      const value = pair.querySelector("[data-value]").value;
+      console.log(value);
+
+      if (key === "") return data;
+
+      // console.log({ ...data, [key]: value });
       return { ...data, [key]: value };
-    });
+
+      // This {} accumulator is a must in a .reduce function
+    }, {});
   }
 };
 
@@ -53,6 +62,8 @@ requestHeadersAddBtn.addEventListener("click", () => {
   requestHeadersContainer.append(createKeyValuePair());
 });
 
+// Handle Form Submission
+// Testing URL: https://jsonplaceholder.typicode.com/todos/1
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
