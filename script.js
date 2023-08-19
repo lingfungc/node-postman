@@ -90,22 +90,37 @@ requestHeadersAddBtn.addEventListener("click", () => {
 
 // We are using axios to intercept the request
 axios.interceptors.request.use((request) => {
-  console.log(request);
+  // console.log(request);
 
   // We add a new custom data in the request, by default is an empty object at first
   request.customData = request.customData || {};
-  console.log(request.customData);
+  // console.log(request.customData);
 
   // We set the start time in the request to be the current timestamp
   request.customData.startTime = new Date().getTime();
 
-  console.log(request);
+  // console.log(request);å
   return request;
 });
 
-// axios.interceptors.response.use(updateEndTime, (e) => {
-//   Promise.reject(updateEndTime(e.response));
-// });
+const updateEndTime = (response) => {
+  console.log(response);
+
+  response.customData = response.customData || {};
+
+  // This response.config stores the data from the request
+  response.customData.time =
+    new Date().getTime() - response.config.customData.startTime;
+  return response;
+};
+
+// We are using axios to intercept the response
+// The 1st argument is for a successful response, and we update end time in this response
+// The 2nd argument is update the end time for the bad response which is rejected
+// In the 2nd argument, the error (e) is from the .catch() in the axios below
+axios.interceptors.response.use(updateEndTime, (e) => {
+  Promise.reject(updateEndTime(e.response));
+});
 
 // Handle Form Submission
 // Testing URL: https://jsonplaceholder.typicode.com/todos/1
@@ -120,7 +135,7 @@ form.addEventListener("submit", (e) => {
   })
     // We need to use .catch() to catch the error(s) when using axios
     // For example, the user enters an invalid URL with -1 as :id
-    .catch((e) => e.response)
+    .catch((e) => e)
     .then((response) => {
       console.log(response);
 
