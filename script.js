@@ -88,14 +88,20 @@ requestHeadersAddBtn.addEventListener("click", () => {
   requestHeadersContainer.append(createKeyValuePair());
 });
 
-// axios.interceptors.request.use((request) => {
-//   console.log(request);
-//   request.customData = request.customData || {};
-//   console.log(request.customData);
-//   request.customData.startTime = new Date().getTime();
-//   console.log(request);
-//   return request;
-// });
+// We are using axios to intercept the request
+axios.interceptors.request.use((request) => {
+  console.log(request);
+
+  // We add a new custom data in the request, by default is an empty object at first
+  request.customData = request.customData || {};
+  console.log(request.customData);
+
+  // We set the start time in the request to be the current timestamp
+  request.customData.startTime = new Date().getTime();
+
+  console.log(request);
+  return request;
+});
 
 // axios.interceptors.response.use(updateEndTime, (e) => {
 //   Promise.reject(updateEndTime(e.response));
