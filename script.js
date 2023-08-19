@@ -2,6 +2,7 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import prettyBytes from "pretty-bytes";
+import setupEditors from "./setupEditors";
 
 // Form
 const form = document.querySelector("[data-form]");
@@ -130,6 +131,8 @@ axios.interceptors.response.use(updateEndTime, (e) => {
   return Promise.reject(updateEndTime(e.response));
 });
 
+const { requestEditor, updateResponseEditor } = setupEditors();
+
 // Handle Form Submission
 // Testing URL: https://jsonplaceholder.typicode.com/todos/1
 form.addEventListener("submit", (e) => {
@@ -152,7 +155,7 @@ form.addEventListener("submit", (e) => {
         .classList.remove("d-none");
 
       updateResponseDetails(response);
-      // updateResponseEditor(response.data);
+      updateResponseEditor(response.data);
       updateResponseHeaders(response.headers);
     });
 });
