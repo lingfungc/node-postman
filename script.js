@@ -138,11 +138,20 @@ const { requestEditor, updateResponseEditor } = setupEditors();
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
+  let data;
+  try {
+    data = JSON.parse(requestEditor.state.doc.toString() || null);
+  } catch (e) {
+    alert("JSON data is malformed");
+    return;
+  }
+
   axios({
     url: document.querySelector("[data-url]").value,
     method: document.querySelector("[data-method]").value,
     params: keyValuePairToObjects(queryParamsContainer),
     headers: keyValuePairToObjects(requestHeadersContainer),
+    data,
   })
     // We need to use .catch() to catch the error(s) when using axios
     // For example, the user enters an invalid URL with -1 as :id
