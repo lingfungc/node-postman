@@ -65,9 +65,10 @@ const updateResponseHeaders = (resHeaders) => {
   });
 };
 
-// Function to Update Response Body Content
-const updateResponseBody = (response) => {
+// Function to Update Response Details Content
+const updateResponseDetails = (response) => {
   document.querySelector("[data-status]").textContent = response.status;
+  document.querySelector("[data-time]").textContent = response.customData.time;
 };
 
 // Query Params
@@ -119,7 +120,7 @@ const updateEndTime = (response) => {
 // The 2nd argument is update the end time for the bad response which is rejected
 // In the 2nd argument, the error (e) is from the .catch() in the axios below
 axios.interceptors.response.use(updateEndTime, (e) => {
-  Promise.reject(updateEndTime(e.response));
+  return Promise.reject(updateEndTime(e.response));
 });
 
 // Handle Form Submission
@@ -143,9 +144,7 @@ form.addEventListener("submit", (e) => {
         .querySelector("[data-response-section]")
         .classList.remove("d-none");
 
-      document.querySelector("[data-status]").innerText = response.status;
-
-      // updateResponseBody(response);
+      updateResponseDetails(response);
       // updateResponseEditor(response.data);
       updateResponseHeaders(response.headers);
     });
