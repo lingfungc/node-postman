@@ -71,6 +71,7 @@ const updateResponseDetails = (response) => {
   document.querySelector("[data-status]").textContent = response.status;
   document.querySelector("[data-time]").textContent = response.customData.time;
   // We use .length() because 1 character equals to 1 byte
+  // Remark that this prettyBytes() isn't 100% accurate
   document.querySelector("[data-size]").textContent = prettyBytes(
     JSON.stringify(response.data).length +
       JSON.stringify(response.headers).length
