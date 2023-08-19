@@ -65,6 +65,11 @@ const updateResponseHeaders = (resHeaders) => {
   });
 };
 
+// Function to Update Response Body Content
+const updateResponseBody = (response) => {
+  document.querySelector("[data-status]").textContent = response.status;
+};
+
 // Query Params
 const queryParamsContainer = document.querySelector("[data-query-params]");
 const queryParamsAddBtn = document.querySelector("[data-add-query-params-btn]");
@@ -83,6 +88,19 @@ requestHeadersAddBtn.addEventListener("click", () => {
   requestHeadersContainer.append(createKeyValuePair());
 });
 
+// axios.interceptors.request.use((request) => {
+//   console.log(request);
+//   request.customData = request.customData || {};
+//   console.log(request.customData);
+//   request.customData.startTime = new Date().getTime();
+//   console.log(request);
+//   return request;
+// });
+
+// axios.interceptors.response.use(updateEndTime, (e) => {
+//   Promise.reject(updateEndTime(e.response));
+// });
+
 // Handle Form Submission
 // Testing URL: https://jsonplaceholder.typicode.com/todos/1
 form.addEventListener("submit", (e) => {
@@ -93,15 +111,21 @@ form.addEventListener("submit", (e) => {
     method: document.querySelector("[data-method]").value,
     params: keyValuePairToObjects(queryParamsContainer),
     headers: keyValuePairToObjects(requestHeadersContainer),
-  }).then((response) => {
-    console.log(response);
+  })
+    // We need to use .catch() to catch the error(s) when using axios
+    // For example, the user enters an invalid URL with -1 as :id
+    .catch((e) => e.response)
+    .then((response) => {
+      console.log(response);
 
-    document
-      .querySelector("[data-response-section]")
-      .classList.remove("d-none");
+      document
+        .querySelector("[data-response-section]")
+        .classList.remove("d-none");
 
-    // updateResponseDetails(response);
-    // updateResponseEditor(response.data);
-    updateResponseHeaders(response.headers);
-  });
+      document.querySelector("[data-status]").innerText = response.status;
+
+      // updateResponseBody(response);
+      // updateResponseEditor(response.data);
+      updateResponseHeaders(response.headers);
+    });
 });
