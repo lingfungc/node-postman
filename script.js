@@ -1,6 +1,7 @@
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import prettyBytes from "pretty-bytes";
 
 // Form
 const form = document.querySelector("[data-form]");
@@ -69,6 +70,11 @@ const updateResponseHeaders = (resHeaders) => {
 const updateResponseDetails = (response) => {
   document.querySelector("[data-status]").textContent = response.status;
   document.querySelector("[data-time]").textContent = response.customData.time;
+  // We use .length() because 1 character equals to 1 byte
+  document.querySelector("[data-size]").textContent = prettyBytes(
+    JSON.stringify(response.data).length +
+      JSON.stringify(response.headers).length
+  );
 };
 
 // Query Params
